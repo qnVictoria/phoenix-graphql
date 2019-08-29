@@ -46,7 +46,9 @@ defmodule GraphqlAuth.Mixfile do
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 2.2.0"},
       {:faker, "~> 0.7"},
-      {:jason, "~> 1.0"}
+      {:jason, "~> 1.0"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.14.0"}
     ]
   end
 

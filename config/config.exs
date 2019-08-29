@@ -15,7 +15,7 @@ config :phoenix, :json_library, Jason
 # Configures the endpoint
 config :graphql_auth, GraphqlAuth.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "p0RJeSomS5Bw4O/R7sFMFr2hVZOqCVObGyXfFFvdQrTMIWpxhYRQhv7ZZViUVAEd",
+  secret_key_base: "Q/pRXuJQoZblGk4AIOHhMX0AkzuUpBS91hQVlO06PqrtRd/iAobc3CdBkMPDVYgc",
   render_errors: [view: GraphqlAuth.ErrorView, accepts: ~w(html json)],
   pubsub: [name: GraphqlAuth.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -24,6 +24,15 @@ config :graphql_auth, GraphqlAuth.Endpoint,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "GraphqlAuth",
+  ttl: { 30, :days },
+  verify_issuer: true, # optional
+  secret_key: "Q/pRXuJQoZblGk4AIOHhMX0AkzuUpBS91hQVlO06PqrtRd/iAobc3CdBkMPDVYgc",
+  serializer: GraphqlAuth.GuardianSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
