@@ -13,7 +13,7 @@ defmodule GraphqlAuth.User do
 
   def update_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email], [:password])
+    |> cast(params, [:name, :email, :password])
     |> validate_required([:name, :email])
     |> put_pass_hash()
   end

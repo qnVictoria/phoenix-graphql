@@ -11,10 +11,10 @@ defmodule GraphqlAuth.Schema do
       resolve &GraphqlAuth.UserResolver.all/2
     end
 
-#    field :user, type: :user do
-#      arg :id, non_null(:id)
-#      resolve &GraphqlAuth.UserResolver.find/2
-#    end
+    field :user, type: :user do
+      arg :id, non_null(:id)
+      resolve &GraphqlAuth.UserResolver.find/2
+    end
   end
 
   input_object :update_user_params do
