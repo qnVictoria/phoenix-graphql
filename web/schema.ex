@@ -31,18 +31,18 @@ defmodule GraphqlAuth.Schema do
 
   mutation do
     field :update_user, type: :user do
-    arg :id, non_null(:integer)
-    arg :user, :update_user_params
+      arg :id, non_null(:integer)
+      arg :user, :update_user_params
 
-    resolve &GraphqlAuth.UserResolver.update/2
-  end
+      resolve &GraphqlAuth.UserResolver.update/2
+    end
 
     field :login, type: :session do
-       arg :email, non_null(:string)
-       arg :password, non_null(:string)
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
 
-       resolve &GraphqlAuth.UserResolver.login/2
-     end
+      resolve &GraphqlAuth.UserResolver.login/2
+    end
 
     field :create_post, type: :post do
       arg :title, non_null(:string)
@@ -63,6 +63,19 @@ defmodule GraphqlAuth.Schema do
       arg :id, non_null(:integer)
 
       resolve &GraphqlAuth.PostResolver.delete/2
+    end
+
+    field :create_comment, type: :comment do
+      arg :body, non_null(:string)
+      arg :post_id, non_null(:integer)
+
+      resolve &GraphqlAuth.CommentResolver.create/2
+    end
+
+    field :delete_comment, type: :comment do
+      arg :id, non_null(:integer)
+
+      resolve &GraphqlAuth.CommentResolver.delete/2
     end
   end
 end
