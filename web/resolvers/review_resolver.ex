@@ -11,9 +11,14 @@ defmodule GraphqlAuth.ReviewResolver do
   end
 
   def update(%{id: id, review: review_params}, _info) do
-    Repo.get!(Review, id)
-    |> Review.changeset(review_params)
-    |> Repo.update
+    review = Repo.get!(Review, id)
+
+    case review do
+      %{user_id: ^user_id} ->
+        |> Review.changeset(review_params)
+        |> Repo.update
+      _ -> {:error, "It's not yours Review"}
+    end
   end
 
   def delete(%{id: id}, %{context: %{current_user: %{id: user_id}}}) do
