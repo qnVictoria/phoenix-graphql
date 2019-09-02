@@ -15,6 +15,8 @@ defmodule GraphqlAuth.Schema.Types do
     field :body, :string
     field :user, :user, resolve: assoc(:user)
     field :comments, list_of(:comment), resolve: assoc(:comments)
+    field :reviews, list_of(:review), resolve: assoc(:reviews)
+
   end
 
   object :session do
@@ -24,5 +26,11 @@ defmodule GraphqlAuth.Schema.Types do
   object :comment do
     field :id, :id
     field :body, :string
+  end
+
+  object :review do
+    field :id, :id
+    field :body, :string
+    field :stars, :integer
   end
 end

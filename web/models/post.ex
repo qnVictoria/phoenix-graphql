@@ -6,6 +6,7 @@ defmodule GraphqlAuth.Post do
     field :body, :string
     belongs_to :user, GraphqlAuth.User, foreign_key: :user_id
     has_many :comments, GraphqlAuth.Comment
+    has_many :reviews, GraphqlAuth.Review
 
     timestamps()
   end
