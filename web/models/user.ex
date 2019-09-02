@@ -8,6 +8,7 @@ defmodule GraphqlAuth.User do
     field :password_hash, :string
     has_many :posts, GraphqlAuth.Post
     has_many :comments, GraphqlAuth.Comment
+    has_many :reviews, GraphqlAuth.Review
 
     timestamps()
   end

@@ -29,6 +29,11 @@ defmodule GraphqlAuth.Schema do
     field :user_id, non_null(:integer)
   end
 
+  input_object :update_review_params do
+    field :body, non_null(:string)
+    field :stars, :integer
+  end
+
   mutation do
     field :update_user, type: :user do
       arg :id, non_null(:integer)
@@ -76,6 +81,27 @@ defmodule GraphqlAuth.Schema do
       arg :id, non_null(:integer)
 
       resolve &GraphqlAuth.CommentResolver.delete/2
+    end
+
+    field :create_review, type: :review do
+      arg :body, non_null(:string)
+      arg :stars, :integer
+      arg :post_id, non_null(:integer)
+
+      resolve &GraphqlAuth.ReviewResolver.create/2
+    end
+
+    field :update_review, type: :review do
+      arg :id, non_null(:integer)
+      arg :review, :update_review_params
+
+      resolve &GraphqlAuth.ReviewResolver.update/2
+    end
+
+    field :delete_review, type: :review do
+      arg :id, non_null(:integer)
+
+      resolve &GraphqlAuth.ReviewResolver.delete/2
     end
   end
 end
