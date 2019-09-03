@@ -15,6 +15,10 @@ defmodule GraphqlAuth.Schema do
       arg :id, non_null(:id)
       resolve &GraphqlAuth.UserResolver.find/2
     end
+
+    field :projects, list_of(:project) do
+      resolve &GraphqlAuth.ProjectResolver.all/2
+    end
   end
 
   input_object :update_user_params do
@@ -32,6 +36,12 @@ defmodule GraphqlAuth.Schema do
   input_object :update_review_params do
     field :body, non_null(:string)
     field :stars, :integer
+  end
+
+  input_object :edit_project_params do
+    field :title, non_null(:string)
+    field :body, non_null(:string)
+    field :user_id, non_null(:integer)
   end
 
   mutation do
@@ -68,6 +78,27 @@ defmodule GraphqlAuth.Schema do
       arg :id, non_null(:integer)
 
       resolve &GraphqlAuth.PostResolver.delete/2
+    end
+
+    field :create_project, type: :project do
+      arg :title, non_null(:string)
+      arg :body, non_null(:string)
+      arg :user_id, non_null(:integer)
+
+      resolve &GraphqlAuth.ProjectResolver.create/2
+    end
+
+    field :edit_project, type: :project do
+      arg :id, non_null(:integer)
+      arg :project, :edit_project_params
+
+      resolve &GraphqlAuth.ProjectResolver.edit/2
+    end
+
+    field :delete_project, type: :project do
+      arg :id, non_null(:integer)
+
+      resolve &GraphqlAuth.ProjectResolver.delete/2
     end
 
     field :create_comment, type: :comment do

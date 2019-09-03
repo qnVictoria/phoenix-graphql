@@ -10,12 +10,12 @@ defmodule GraphqlAuth.ReviewResolver do
     |> Repo.insert
   end
 
-  def update(%{id: id, review: review_params}, _info) do
+  def update(%{id: id, review: review_params}, %{context: %{current_user: %{id: user_id}}}) do
     review = Repo.get!(Review, id)
 
     case review do
       %{user_id: ^user_id} ->
-        |> Review.changeset(review_params)
+        Review.changeset(review, review_params)
         |> Repo.update
       _ -> {:error, "It's not yours Review"}
     end
