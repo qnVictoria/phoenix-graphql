@@ -31,6 +31,6 @@ defmodule GraphqlAuth.ProjectResolver do
 
   def delete(%{id: id}, _info) do
     Repo.get!(Project, id)
-    |> Repo.delete(project)
+    |> Repo.delete
   end
 end
