@@ -24,13 +24,13 @@ defmodule GraphqlAuth.ProjectResolver do
   end
 
   def edit(%{id: id, project: project_params}, _info) do
-    project = Repo.get!(Project, id)
+    Repo.get!(Project, id)
     |> Project.changeset(project_params)
     |> Repo.update
   end
 
   def delete(%{id: id}, _info) do
-    project = Repo.get!(Project, id)
+    Repo.get!(Project, id)
     Repo.delete(project)
   end
 end
