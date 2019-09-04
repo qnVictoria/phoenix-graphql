@@ -48,7 +48,8 @@ defmodule GraphqlAuth.Mixfile do
       {:faker, "~> 0.7"},
       {:jason, "~> 1.0"},
       {:comeonin, "~> 2.5"},
-      {:guardian, "~> 0.14.0"}
+      {:guardian, "~> 0.14.0"},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 
